@@ -31,6 +31,7 @@ void Cube::scramble(){
         turn(moves[move]);
         turnCount--;
     }
+    
     outputFile.open("recon.txt", std::ofstream::out | std::ofstream::app);
     outputFile << "\nSolution: \n";
     outputFile.close();
@@ -412,7 +413,7 @@ void Cube::D(){
     for(int j = 6; j > 3; j--){
         cube[1][j] = temp[4][j];
         for(int i = 1; i < 4; i++){
-                cube[i+1][j] = temp[i][j];
+            cube[i+1][j] = temp[i][j];
         }
     }
 }

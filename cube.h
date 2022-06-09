@@ -6,8 +6,8 @@ class Cube{
         int cube[6][9];
         int turnCount = 0;
     public:
-        Cube();
         std::ofstream outputFile;
+        Cube();
         void initialize();
         void print();
         void scramble();

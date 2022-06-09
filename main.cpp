@@ -13,10 +13,10 @@ int main(){
     std::cout << "After entering a string of moves, enter any non-move text to apply the moves to the cube.\n";
     std::cout << "Scrambles and solutions are viewable in recon.txt.\n";
     std::cout << "Enter 'exit' at any time to exit the program.\n";
+
     do{
         cube.initialize();
         while(!cube.checkIfSolved()){
-
             std::cout << "Enter moves: \n";
 
             while((std::cin >> newTurn) && cube.validMove(newTurn)){
@@ -29,13 +29,14 @@ int main(){
             for(std::string t : turns){
                 cube.turn(t);
             }
+
             cube.print();
             turns.clear();
             cube.outputFile.open("recon.txt" , std::ofstream::out | std::ofstream::app);
             cube.outputFile << '\n';
             cube.outputFile.close();
         }
-        std::cout << "Enter \'n\' for a new scramble or anything else to quit: ";
+        std::cout << "Enter \'n\' to get a new scramble or any other text to exit the program: ";
         std::cin >> repeat;
     }
     while(repeat == "n" || repeat == "N");
