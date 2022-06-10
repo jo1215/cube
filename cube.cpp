@@ -38,33 +38,54 @@ void Cube::scramble(){
 }
 
 void Cube::print(){
-    std::cout << std::string(20, '-') << '\n';
+    std::string temp[6][9];
     for(int i = 0; i < 6; i++){
         for(int j = 0; j < 9; j++){
             switch(cube[i][j]){
                 case 0:
-                    std::cout << "W ";
+                    temp[i][j] = "W";
                     break;
                 case 1:
-                    std::cout << "G ";
+                    temp[i][j] = "G";
                     break;
                 case 2:
-                    std::cout << "R ";
+                    temp[i][j] = "R";
                     break;
                 case 3:
-                    std::cout << "B ";
+                    temp[i][j] = "B";
                     break;
                 case 4:
-                    std::cout << "O ";
+                    temp[i][j] = "O";
                     break;
                 case 5:
-                    std::cout << "Y ";
+                    temp[i][j] = "Y";
                     break;
             }
         }
-        std::cout << "\n";
     }
-    std::cout << std::string(20, '-') << '\n';
+    std::cout << std::string(21, '-') << '\n';
+    std::cout << "\t" << temp[3][4] << " " << temp[3][5] << " " << temp[3][6] << '\n';
+    std::cout << "\t" << temp[3][3] << " " << temp[3][8] << " " << temp[3][7] << '\n';
+    std::cout << "\t" << temp[3][2] << " " << temp[3][1] << " " << temp[3][0] << '\n';
+    std::cout << "\t" << std::string(5, '-') << '\n';
+    std::cout << temp[4][6] << " " << temp[4][7] << " " << temp[4][0] << " " << "|" << " ";
+    std::cout << temp[0][0] << " " << temp[0][1] << " " << temp[0][2] << " " << "|" << " ";
+    std::cout << temp[2][2] << " " << temp[2][3] << " " << temp[2][4] << "\n";
+    std::cout << temp[4][5] << " " << temp[4][8] << " " << temp[4][1] << " " << "|" << " ";
+    std::cout << temp[0][7] << " " << temp[0][8] << " " << temp[0][3] << " " << "|" << " ";
+    std::cout << temp[2][1] << " " << temp[2][8] << " " << temp[2][5] << "\n";
+    std::cout << temp[4][4] << " " << temp[4][3] << " " << temp[4][2] << " " << "|" << " ";
+    std::cout << temp[0][6] << " " << temp[0][5] << " " << temp[0][4] << " " << "|" << " ";
+    std::cout << temp[2][0] << " " << temp[2][7] << " " << temp[2][6] << "\n";
+    std::cout << "\t" << std::string(5, '-') << '\n';
+    std::cout << "\t" << temp[1][0] << " " << temp[1][1] << " " << temp[1][2] << '\n';
+    std::cout << "\t" << temp[1][7] << " " << temp[1][8] << " " << temp[1][3] << '\n';
+    std::cout << "\t" << temp[1][6] << " " << temp[1][5] << " " << temp[1][4] << '\n';
+    std::cout << "\t" << std::string(5, '-') << '\n';
+    std::cout << "\t" << temp[5][0] << " " << temp[5][1] << " " << temp[5][2] << '\n';
+    std::cout << "\t" << temp[5][7] << " " << temp[5][8] << " " << temp[5][3] << '\n';
+    std::cout << "\t" << temp[5][6] << " " << temp[5][5] << " " << temp[5][4] << '\n';
+    std::cout << std::string(21, '-') << '\n';
 }
 
 void Cube::writeTurn(std::string m){
@@ -368,6 +389,9 @@ bool Cube::checkIfSolved(){
             }
         }
     }
+    outputFile.open("recon.txt", std::ofstream::out | std::ofstream::app);
+    outputFile << '\n';
+    outputFile.close();
     std::cout << "Cube solved in " << turnCount << " moves! Scramble and solution avaible in recon.txt.\n";
     return true;
 }
