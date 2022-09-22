@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random>
 
+int solveNum = 1;
 Cube::Cube(){}
 
 void Cube::initialize(){
@@ -22,8 +23,9 @@ void Cube::scramble(){
     std::uniform_real_distribution<> dis(0.0, 1.0);
     
     outputFile.open("recon.txt", std::ofstream::out | std::ofstream::app);
-    outputFile << "Scramble: ";
+    outputFile << "Solve #" << solveNum << "\n" << "Scramble: ";
     outputFile.close();
+    solveNum++;
 
     for(int i = 0; i < 30; i++){
         float rng = dis(gen) * 1000000;
