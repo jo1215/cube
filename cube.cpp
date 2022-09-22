@@ -2,9 +2,9 @@
 #include <ctime>
 #include <iostream>
 #include <random>
+#include <algorithm>
 
-int solveNum = 1;
-Cube::Cube(){}
+Cube::Cube(): turnCount(0), solveNum(1), validMoves{"U","D","L","R","F","B","u","d","l","r","f","b","U'","D'","L'","R'","F'","B'","u'","d'","l'","r'","f'","b'","U2","D2","L2","R2","F2","B2","u2","d2","l2","r2","f2","b2","U2'","D2'","L2'","R2'","F2'","B2'","u2'","d2'","l2'","r2'","f2'","b2'","x","x'","x2","y","y'","y2","z","z'","z2","M","M'","M2","E","E'","E2","S","S'","S2","exit"}{}
 
 void Cube::initialize(){
     for(int i = 0; i < 6; i++){
@@ -14,6 +14,11 @@ void Cube::initialize(){
     }
     scramble();
     print();
+}
+
+void Cube::makeRecon(){
+    outputFile.open("recon.txt");
+    outputFile.close();
 }
 
 void Cube::scramble(){
@@ -94,6 +99,25 @@ void Cube::writeTurn(std::string m){
     outputFile.open("recon.txt" , std::ofstream::out | std::ofstream::app);
     outputFile << m << " ";
     outputFile.close();
+}
+
+void Cube::nextLine(){
+    if(!(turns.empty())){
+        outputFile.open("recon.txt" , std::ofstream::out | std::ofstream::app);
+        outputFile << '\n';
+        outputFile.close();
+    }
+    turns.clear();
+}
+
+void Cube::addTurn(std::string newTurn){
+    turns.push_back(newTurn);
+}
+
+void Cube::solveTurn(){
+    for(std::string t : turns){
+                turn(t);
+            }
 }
 
 void Cube::turn(std::string m){
@@ -375,11 +399,8 @@ void Cube::turn(std::string m){
 }
 
 bool Cube::validMove(std::string m){
-    //if (m == "U" || m == "D" || m == "L" || m == "R" || m == "F" || m == "B" || m == "u" || m == "d" || m == "l" || m == "r" || m == "f" || m == "b" || m == "U'" || m == "D'" || m == "L'" || m == "R'" || m == "F'" || m == "B'" || m == "u'" || m == "d'" || m == "l'" || m == "r'" || m == "f'" || m == "b'" || m == "U2" || m == "D2" || m == "L2" || m == "R2" || m == "F2" || m == "B2" || m == "u2" || m == "d2" || m == "l2" || m == "r2" || m == "f2" || m == "b2" || m == "U2'" || m == "D2'" || m == "L2'" || m == "R2'" || m == "F2'" || m == "B2'" || m == "u2'" || m == "d2'" || m == "l2'" || m == "r2'" || m == "f2'" || m == "b2'" || m == "x" || m == "x'" || m == "x2" || m == "y" || m == "y'" || m == "y2" || m == "z" || m == "z'" || m == "z2" || m == "M" || m == "M'" || m == "M2" || m == "E" || m == "E'" || m == "E2" || m == "S" || m == "S'" || m == "S2" || m == "exit"){
-    for(int i = 0; i < 67; i++){
-        if(m == validMoves[i]){
-            return true;
-        }
+    if(std::find(std::begin(validMoves), std::end(validMoves), m) != std::end(validMoves)){
+        return true;
     }
     return false;
 }

@@ -1,13 +1,10 @@
 #include <iostream>
-#include <vector>
 #include "cube.h"
 
 int main(){
     Cube cube;
-    std::vector<std::string> turns;
     std::string newTurn, repeat;
-    cube.outputFile.open("recon.txt");
-    cube.outputFile.close();
+    cube.makeRecon();
     
     std::cout << "Enter moves separated by spaces, use uppercase for layer moves and lowercase for wide moves. Slice moves and cube rotations are supported.\n";
     std::cout << "After entering a string of moves, enter any non-move text to apply the moves to the cube.\n";
@@ -23,20 +20,14 @@ int main(){
                 if(newTurn == "exit"){
                     return 0;
                 }
-                turns.push_back(newTurn);
+                cube.addTurn(newTurn);
             };
 
-            for(std::string t : turns){
-                cube.turn(t);
-            }
-
+            cube.solveTurn();
             cube.print();
-            turns.clear();
-            cube.outputFile.open("recon.txt" , std::ofstream::out | std::ofstream::app);
-            cube.outputFile << '\n';
-            cube.outputFile.close();
+            cube.nextLine();
         }
-        std::cout << "Enter \'n\' to get a new scramble or any other text to exit the program: ";
+        std::cout << "Enter \'n\' to get a new scramble or enter any other text to exit the program: ";
         std::cin >> repeat;
     }
     while(repeat == "n" || repeat == "N");

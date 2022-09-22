@@ -1,0 +1,4 @@
+Solve #1
+Scramble: D2 U B2 U' R U D' R' D R U2 U2 B U' U2 B2 L B' D L F D' B2 L' R B' U L' L2 U' 
+Solution: 
+F 
