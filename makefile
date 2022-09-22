@@ -8,4 +8,4 @@ cube.o: cube.cpp cube.h
 	g++ -c cube.cpp
 
 clean:
-	rm *.o cube
+	rm *.o cube recon.txt
